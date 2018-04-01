@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+$LOAD_PATH << File.expand_path("../../lib/", __FILE__)
+require 'thor'
+require 'drive_sync'
+require 'rsync'
+Drive_sync::Sync.start(ARGV)
