@@ -23,10 +23,14 @@ module Drive_sync
     def back_up
       puts " backing up black to blue"     
       #Rsync.run("/Volumes/Black/", "/Volumes/Blue/", ['-a', '-v', '-h', '--log-format=FORMAT', '--delete') do |result|
-      Rsync.run( "/Volumes/Black/", "/Volumes/Blue/", ['-avP', '--log-format=FORMAT',' --delete', '--exclude=".*"']) do |result|
+      Rsync.run( "/Volumes/Black/", "/Volumes/Blue/", ['--progress', '--stats', '-a', '-v', '--log-format=FORMAT',' --delete', '--exclude=".*"']) do |result|
         if result.success?
+          puts result
           MyLog.log.info "Success"
           result.changes.each do |change|
+            puts change
+            puts '.......'
+
             puts "changes"
             MyLog.log.info "#{change.filename} (#{change.summary})"
             puts "#{change.filename} (#{change.summary})"
