@@ -21,8 +21,9 @@ module Drive_sync
 
     desc "back_up", "back up black to blue"
     def back_up
-      puts "backing up black to blue"     
-      Rsync.run("/Volumes/Black/", "/Volumes/Blue/", ['-a', '-v', '-h', '--log-format=FORMAT', '--delete']) do |result|
+      puts " backing up black to blue"     
+      #Rsync.run("/Volumes/Black/", "/Volumes/Blue/", ['-a', '-v', '-h', '--log-format=FORMAT', '--delete') do |result|
+      Rsync.run( "/Volumes/Black/", "/Volumes/Blue/", ['-avP', '--log-format=FORMAT',' --delete', '--exclude=".*"']) do |result|
         if result.success?
           MyLog.log.info "Success"
           result.changes.each do |change|
